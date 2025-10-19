@@ -1,4 +1,4 @@
-# 🧩 Sockx
+# 🧩 Wspulse
 
 > A lightweight, Socket.IO-style real-time server written in Go — but fully compatible with any WebSocket client.
 
@@ -10,10 +10,10 @@
 
 ## 🚀 Overview
 
-**Sockx** is a Go library for building **real-time communication systems** using **Gorilla WebSocket** and Go’s native `net/http`.  
+**Wspulse** is a Go library for building **real-time communication systems** using **Gorilla WebSocket** and Go’s native `net/http`.  
 It’s inspired by Socket.IO, but without vendor lock-in — meaning you can connect **any standard WebSocket client**.
 
-Sockx provides an **event-driven API** with:
+Wspulse provides an **event-driven API** with:
 - 🎯 **Custom Events**
 - 🏠 **Rooms**
 - 🧭 **Namespaces**

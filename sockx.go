@@ -29,12 +29,12 @@ type Server struct {
 
 // Namespace represents a namespace that groups clients.
 type Namespace struct {
-	name       string
-	clients    map[*Client]bool
-	rooms      map[string]*Room
-	events     map[string]EventHandler
-	server     *Server
-	mu         sync.RWMutex
+	name    string
+	clients map[*Client]bool
+	rooms   map[string]*Room
+	events  map[string]EventHandler
+	server  *Server
+	mu      sync.RWMutex
 }
 
 // Room represents a room within a namespace.
@@ -237,7 +237,7 @@ func (c *Client) Emit(event string, data interface{}) {
 func (c *Client) readPump() {
 	defer func() {
 		c.namespace.removeClient(c)
-		
+
 		// Leave all rooms
 		c.mu.RLock()
 		rooms := make([]string, 0, len(c.rooms))
@@ -245,11 +245,11 @@ func (c *Client) readPump() {
 			rooms = append(rooms, room)
 		}
 		c.mu.RUnlock()
-		
+
 		for _, room := range rooms {
 			c.Leave(room)
 		}
-		
+
 		c.conn.Close()
 	}()
 
@@ -285,7 +285,7 @@ func (s *Server) ServeWebSocket(namespaceName string) http.HandlerFunc {
 		}
 
 		namespace := s.Namespace(namespaceName)
-		
+
 		client := &Client{
 			ID:        generateID(),
 			conn:      conn,

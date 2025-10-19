@@ -18,7 +18,7 @@ func main() {
 	// Register event handlers
 	ns.On("message", func(client *sockx.Client, data interface{}) {
 		log.Printf("Client %s sent message: %v", client.ID, data)
-		
+
 		// Broadcast to all clients in the namespace
 		ns.Emit("message", map[string]interface{}{
 			"from": client.ID,
@@ -31,10 +31,10 @@ func main() {
 		if !ok {
 			return
 		}
-		
+
 		log.Printf("Client %s joining room: %s", client.ID, roomName)
 		client.Join(roomName)
-		
+
 		// Broadcast to the room
 		room := ns.Room(roomName)
 		room.Emit("user-joined", map[string]interface{}{
@@ -48,16 +48,16 @@ func main() {
 		if !ok {
 			return
 		}
-		
+
 		roomName, ok := msg["room"].(string)
 		if !ok {
 			return
 		}
-		
+
 		text, _ := msg["text"]
-		
+
 		log.Printf("Client %s sent message to room %s: %v", client.ID, roomName, text)
-		
+
 		// Send to specific room
 		room := ns.Room(roomName)
 		room.Emit("room-message", map[string]interface{}{
@@ -69,7 +69,7 @@ func main() {
 
 	// Setup HTTP routes
 	http.HandleFunc("/ws", server.ServeWebSocket("/"))
-	
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html")
 		fmt.Fprintf(w, `

@@ -1,0 +1,27 @@
+# Build artifacts
+bin/
+dist/
+*.exe
+*.exe~
+*.dll
+*.dylib
+*.so
+*.test
+
+# Dependency directories
+vendor/
+
+# Coverage and profiling
+*.out
+profile.*
+coverage/
+
+# Logs
+*.log
+
+# Editor and OS metadata
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
